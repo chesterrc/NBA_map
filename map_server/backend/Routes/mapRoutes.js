@@ -1,8 +1,8 @@
 const express = require('express');
 const{
-    getCity,
+    getCities,
     getNBATeams,
-    getNBATeam
+    getNBATeam,
 } = require('../controllers/controller')
 const router = express.Router();
 
@@ -15,6 +15,6 @@ router.get('/', getNBATeams)
 router.get('/:id', getNBATeam);
 
 //City get requests
-router.get('/City/:id', getCity);
+router.get('/Cities', getCities);
 
 module.exports = router
