@@ -10,14 +10,14 @@ const getCity = asyncHandler( async (req, res) => {
     const{ id } = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: "no such workout"})
+        return res.status(404).json({error: "no such city"})
     }
 
     //checking request text
     const cityCoords = await City.findbyID(id);
     res.send(cityCoords);
     if(!cityCoords){
-        return res.status(404).json({error: "no such workout"})
+        return res.status(404).json({error: "no such cityt"})
     }
 });
 
@@ -35,14 +35,14 @@ const getNBATeam = asyncHandler( async (req, res) => {
     const{ id } = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: "no such workout"})
+        return res.status(404).json({error: "no such cityt"})
     }
 
     //checking request text
     const teamCoords = await Team.findbyID(id);
 
     if(!teamCoords) {
-        return res.status(404).json({error: "No such workout"})
+        return res.status(404).json({error: "No such cityt"})
     }
 
     res.status(200).json(workout)

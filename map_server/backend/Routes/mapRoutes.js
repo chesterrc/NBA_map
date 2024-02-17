@@ -10,9 +10,9 @@ const router = express.Router();
 //CRUD functionality
 
 //NBA Team GET requests
-router.get('/allTeams', getNBATeams)
+router.get('/', getNBATeams)
 
-router.get('/Team/:id', getNBATeam);
+router.get('/:id', getNBATeam);
 
 //City get requests
 router.get('/City/:id', getCity);

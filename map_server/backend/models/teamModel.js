@@ -1,21 +1,6 @@
 const mongoose = require('mongoose');
 
 //schema used to pull data from nba teams
-const TeamSchema = mongoose.Schema(
-    {
-        City:{
-            type: String,
-            required: true,
-        },
-        Latitude:{
-            type: Float64Array,
-            required: true,
-        },
-        Longitude:{
-            type: Float64Array,
-            required: true,
-        }
-    }
-)
+const TeamSchema = mongoose.Schema({})
 
-module.exports = mongoose.model('Team', TeamSchema);
+module.exports = mongoose.model('Team', TeamSchema, 'NBA_teams');
