@@ -25,25 +25,19 @@ const AmericaMap = () => {
     }, [])
 
     //call backend to fetch cities of US
-    useEffect(() => {
-        const fetchCityCoords = async () => {
-            const response = await fetch('http://localhost:5000/map/Cities')
-            const json = await response.json()
-
-            //check response
-            if (response.ok){
-                console.log('response is ok')
-                setSearchInput(json)
-            }
-        }
-
-        fetchCityCoords()
-    }, [])
+    async function searchCity(url="http://localhost:5000/map/cities", data={ city }){
+        const response = await fetch(url, {
+            method: "GET",
+            body: JSON.stringify(data),
+        })
+    }
 
     //handler to read changes in the search bar
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         e.preventDefault();
-        setSearchInput(e.target.value);
+        searchCity(data= e.target.value).then((city)=>{
+            console.log(city);
+        });
     };
 
     //function to check if someone has searched a city
