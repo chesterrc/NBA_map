@@ -27,3 +27,43 @@ A search functionality was made to assist in creating a search for a city. When 
 ### Search debugging
 
 Right click on the webpage when running the frontend and backend of the server. Click 'inspect' and check the console tab, this tab will list all of the cities that align with what the user enters within the search bar.
+
+## Example Request/Receive on backend
+const getCities = asyncHandler( async (req, res) => {
+    const query = req.query.query;
+
+    try {
+        //requests data obtained from query from MongoDB
+        const searchResults = await City.find({ City: { $regex: query, $options: 'i'} }).limit(5);
+
+        //receives and returns the response
+        res.json(searchResults);
+    } catch (error) {
+        console.error('Error searching in MongoDB:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+## Example Request/Receive on frontend
+
+ //call backend to grab city data
+    useEffect(() => {
+        const fetchTeamcoords = async () => {
+            //this requests data
+            const response = await fetch('http://localhost:5000/map/')
+            //this converts the response to json format that is received
+            const json = await response.json()
+
+            //check response
+            if (response.ok){
+                //this uses a statehook
+                console.log('response is ok')
+                setTeamCoords(json)
+            }
+        }
+
+        fetchTeamcoords()
+    }, [])
+
+
