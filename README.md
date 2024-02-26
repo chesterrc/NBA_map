@@ -29,6 +29,7 @@ A search functionality was made to assist in creating a search for a city. When 
 Right click on the webpage when running the frontend and backend of the server. Click 'inspect' and check the console tab, this tab will list all of the cities that align with what the user enters within the search bar.
 
 ## Example Request/Receive on backend
+```
 const getCities = asyncHandler( async (req, res) => {
     const query = req.query.query;
 
@@ -43,10 +44,10 @@ const getCities = asyncHandler( async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
+```
 
 ## Example Request/Receive on frontend
-
+```
  //call backend to grab city data
     useEffect(() => {
         const fetchTeamcoords = async () => {
@@ -65,5 +66,5 @@ const getCities = asyncHandler( async (req, res) => {
 
         fetchTeamcoords()
     }, [])
-
+```
 
