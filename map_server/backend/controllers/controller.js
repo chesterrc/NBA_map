@@ -6,21 +6,17 @@ const { default: mongoose } = require('mongoose');
 
 //get coords for a city
 const getCities = asyncHandler( async (req, res) => {
-    //single team id
-    const{ City } = req.params
+    const query = req.query.query;
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: "no such city"})
+    try {
+        //limits search results
+        const searchResults = await City.find({ City: { $regex: query, $options: 'i'} }).limit(5);
+
+        res.json(searchResults);
+    } catch (error) {
+        console.error('Error searching in MongoDB:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-
-    //checking request text
-    const cityCoords = await Team.findbyID(id);
-
-    if(!cityCoords) {
-        return res.status(404).json({error: "No such city"})
-    }
-
-    res.status(200).json(cityCoords);
 });
     
 
@@ -38,14 +34,14 @@ const getNBATeam = asyncHandler( async (req, res) => {
     const{ id } = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: "no such cityt"})
+        return res.status(404).json({error: "no such city"})
     }
 
     //checking request text
     const teamCoords = await Team.findbyID(id);
 
     if(!teamCoords) {
-        return res.status(404).json({error: "No such cityt"})
+        return res.status(404).json({error: "No such city"})
     }
 
     res.status(200).json(teamCoords);

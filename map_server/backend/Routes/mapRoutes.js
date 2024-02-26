@@ -12,9 +12,7 @@ const router = express.Router();
 //NBA Team GET requests
 router.get('/', getNBATeams)
 
-router.get('/:id', getNBATeam);
-
 //City get requests
-router.get('/Cities', getCities);
+router.get('/search', getCities);
 
 module.exports = router
